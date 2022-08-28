@@ -1,0 +1,6 @@
+$out_root/
+{
+  include libcrails-semantics/
+}
+
+export $out_root/libcrails-semantics/$import.target
