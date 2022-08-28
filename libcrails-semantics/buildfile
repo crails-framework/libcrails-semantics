@@ -9,7 +9,7 @@ cxx.poptions =+ "-I$out_root" "-I$src_root"
 
 lib{crails-semantics}:
 {
-  cxx.export.poptions = "-I$out_root" "-I$src_root"
+  cxx.export.poptions = "-I$out_root/libcrails-semantics/" "-I$src_root/libcrails-semantics/"
   cxx.export.libs = $intf_libs
 }
 
@@ -23,6 +23,6 @@ else
 
 {hxx ixx txx}{*}:
 {
-  install         = include/crails/
+  install         = include/
   install.subdirs = true
 }

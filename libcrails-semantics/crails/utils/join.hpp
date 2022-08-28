@@ -1,6 +1,8 @@
 #ifndef  CRAILS_SEMANTICS_JOIN_HPP
 # define CRAILS_SEMANTICS_JOIN_HPP
 
+# include <sstream>
+
 namespace Crails
 {
   template<typename ITERATOR>
