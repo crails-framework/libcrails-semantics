@@ -124,12 +124,12 @@ namespace Crails
   string dasherize(const string& source)
   {
     string result;
-    bool dash_on_next_character = true;
+    bool dash_on_next_character = false;
 
     for (size_t i = 0 ; i < source.length() ; ++i)
     {
       if (source[i] == ' ')
-        dash_on_next_character = true;
+        dash_on_next_character = result.length() > 0;
       else if (dash_on_next_character || (source[i] >= 'A' && source[i] <= 'Z'))
       {
         result += '-';
