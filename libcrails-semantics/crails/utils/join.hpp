@@ -5,8 +5,8 @@
 
 namespace Crails
 {
-  template<typename ITERATOR>
-  std::string join(ITERATOR begin, ITERATOR end, char separator = 0)
+  template<typename ITERATOR, typename SEPARATOR = char>
+  std::string join(ITERATOR begin, ITERATOR end, SEPARATOR separator = ' ')
   {
     std::stringstream stream;
 
@@ -18,8 +18,8 @@ namespace Crails
     return stream.str();
   }
 
-  template<typename LIST>
-  std::string join(const LIST& list, char separator = 0)
+  template<typename LIST, typename SEPARATOR = char>
+  std::string join(const LIST& list, SEPARATOR separator = ' ')
   {
     return join(list.begin(), list.end(), separator);
   }
