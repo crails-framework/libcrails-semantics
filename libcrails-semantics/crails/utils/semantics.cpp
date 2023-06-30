@@ -94,6 +94,8 @@ namespace Crails
         if (str[i - 1] != ' ')
           ret += '_';
       }
+      else if (str[i] == '-')
+        ret += '_';
       else
         ret += str[i];
     }
