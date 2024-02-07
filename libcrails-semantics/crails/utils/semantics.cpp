@@ -86,7 +86,7 @@ namespace Crails
     {
       if (str[i] >= 'A' && str[i] <= 'Z')
       {
-        if (i > 0) ret += '_';
+        if (i > 0 && (ret.length() == 0 || (*ret.rbegin()) != '_')) ret += '_';
         ret += str[i] - 'A' + 'a';
       }
       else if (str[i] == ' ')
@@ -130,7 +130,7 @@ namespace Crails
 
     for (size_t i = 0 ; i < source.length() ; ++i)
     {
-      if (source[i] == ' ')
+      if (source[i] == ' ' || source[i] == '_' || source[i] == '-')
         dash_on_next_character = result.length() > 0;
       else if (dash_on_next_character || (source[i] >= 'A' && source[i] <= 'Z'))
       {
