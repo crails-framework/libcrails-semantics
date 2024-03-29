@@ -3,6 +3,7 @@
 
 # include "base64.hpp"
 # include "semantics.hpp"
+# include "string_replace.hpp"
 # include "split.hpp"
 # include "join.hpp"
 
