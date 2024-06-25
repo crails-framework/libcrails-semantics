@@ -94,7 +94,7 @@ namespace Crails
         if (str[i - 1] != ' ')
           ret += '_';
       }
-      else if (str[i] == '-')
+      else if (str[i] == '-' || str[i] == '\'' || str[i] == '"')
         ret += '_';
       else
         ret += str[i];
@@ -130,7 +130,7 @@ namespace Crails
 
     for (size_t i = 0 ; i < source.length() ; ++i)
     {
-      if (source[i] == ' ' || source[i] == '_' || source[i] == '-')
+      if (source[i] == ' ' || source[i] == '_' || source[i] == '-' || source[i] == '\'' || source[i] == '"')
         dash_on_next_character = result.length() > 0;
       else if (dash_on_next_character || (source[i] >= 'A' && source[i] <= 'Z'))
       {
