@@ -13,7 +13,8 @@ namespace Crails
 
   string strip(const string& str, char character)
   {
-    unsigned short w_begin, w_end;
+    unsigned short w_begin = 0;
+    unsigned short w_end;
     bool           got_begin = false;
 
     if (str.length() == 0) return str;
