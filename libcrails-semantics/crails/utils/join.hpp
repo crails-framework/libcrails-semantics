@@ -8,7 +8,7 @@ namespace Crails
   template<typename ITERATOR, typename SEPARATOR = char>
   std::string join(ITERATOR begin, ITERATOR end, SEPARATOR separator = ' ')
   {
-    std::stringstream stream;
+    std::ostringstream stream;
 
     for (ITERATOR it = begin; it != end ; ++it)
     {
