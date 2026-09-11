@@ -8,21 +8,27 @@ namespace Crails
   template<typename VALUE_TYPE, typename LIST_TYPE = std::list<VALUE_TYPE>>
   LIST_TYPE split(const VALUE_TYPE& str, char c, bool count_repetitions = false)
   {
-    LIST_TYPE    ret;
-    int          last_sep = -1;
-    unsigned int i;
+    LIST_TYPE ret;
+    long      last_sep = -1;
+    size_t    i;
 
     for (i = 0 ; i < str.size() ; ++i)
     {
       if (str[i] == c)
       {
-        if (i != 0 && (count_repetitions || str[i - 1] != c))
-          ret.push_back(str.substr(last_sep + 1, i - (last_sep + 1)));
-        last_sep = i;
+        size_t segment_length = i - static_cast<size_t>(last_sep + 1);
+
+        if (count_repetitions || segment_length > 0)
+          ret.push_back(str.substr(static_cast<size_t>(last_sep + 1), segment_length));
+        last_sep = static_cast<long>(i);
       }
     }
-    if ((unsigned int)last_sep != i && i > 0 && str[i - 1] != c)
-      ret.push_back(str.substr(last_sep + 1));
+    {
+      size_t segment_length = str.size() - static_cast<size_t>(last_sep + 1);
+
+      if (count_repetitions || segment_length > 0)
+        ret.push_back(str.substr(static_cast<size_t>(last_sep + 1)));
+    }
     return (ret);
   }
 }

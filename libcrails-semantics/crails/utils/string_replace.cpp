@@ -6,12 +6,15 @@ namespace Crails
 {
   string replace_all_occurences(string data, const string_view pattern, const string_view filler)
   {
-    size_t pos = 0;
-
-    while ((pos = data.find(pattern, pos)) != string::npos)
+    if (pattern.length() > 0)
     {
-      data.replace(pos, pattern.length(), filler.data(), filler.length());
-      pos += filler.length();
+      size_t pos = 0;
+
+      while ((pos = data.find(pattern, pos)) != string::npos)
+      {
+        data.replace(pos, pattern.length(), filler.data(), filler.length());
+        pos += filler.length();
+      }
     }
     return data;
   }
@@ -33,7 +36,7 @@ namespace Crails
       const smatch      match = *it;
       const string_view match_string(&data[match.position()], match.length());
 
-      result += data.substr(pos, match.position());
+      result += data.substr(pos, match.position() - pos);
       result += filler(match_string);
       pos = match.position() + match.length();
     }

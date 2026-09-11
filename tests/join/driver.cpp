@@ -22,5 +22,6 @@ int main()
   assert(Crails::join(listA) == "coucou petite perruche");
   assert(Crails::join(listB, '+') == "12+42+914");
   assert(Crails::join(listA.rbegin(), listA.rend()) == "perruche petite coucou");
+  assert(Crails::join(listB, "num") == "12num42num914");
   return 0;
 }

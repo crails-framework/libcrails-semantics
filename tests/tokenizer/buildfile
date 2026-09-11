@@ -1,0 +1,3 @@
+import libs = libcrails-semantics%lib{crails-semantics}
+
+exe{driver}: {hxx ixx txx cxx}{**} $libs testscript{**}

@@ -13,12 +13,12 @@ namespace Crails
 
   string strip(const string& str, char character)
   {
-    unsigned short w_begin = 0;
-    unsigned short w_end;
-    bool           got_begin = false;
+    size_t w_begin = 0;
+    size_t w_end   = 0;
+    bool   got_begin = false;
 
     if (str.length() == 0) return str;
-    for (unsigned short i = 0 ; i < str.length() ; ++i)
+    for (size_t i = 0 ; i < str.length() ; ++i)
     {
       if (str[i] != character)
       {
@@ -30,6 +30,8 @@ namespace Crails
         w_end = i;
       }
     }
+    if (got_begin == false)
+      return string();
     return str.substr(w_begin, (w_end + 1) - w_begin);
   }
 
@@ -58,7 +60,7 @@ namespace Crails
     string str = strip(tmp);
     string ret;
 
-    for (unsigned short i = 0 ;  i < str.size() ; ++i)
+    for (size_t i = 0 ;  i < str.size() ; ++i)
     {
       if (i == 0 || str[i - 1] == '_' || str[i - 1] == ' ')
       {
@@ -83,7 +85,7 @@ namespace Crails
     string str = strip(tmp);
     string ret;
 
-    for (unsigned short i = 0 ;  i < str.size() ; ++i)
+    for (size_t i = 0 ;  i < str.size() ; ++i)
     {
       if (str[i] >= 'A' && str[i] <= 'Z')
       {
@@ -92,7 +94,7 @@ namespace Crails
       }
       else if (str[i] == ' ')
       {
-        if (str[i - 1] != ' ')
+        if (i == 0 || str[i - 1] != ' ')
           ret += '_';
       }
       else if (str[i] == '-' || str[i] == '\'' || str[i] == '"')
@@ -113,7 +115,7 @@ namespace Crails
       if (is_alphanumerical(source[i]))
       {
         if (uppercase_on_next_character)
-          result += std::toupper(source[i]);
+          result += std::toupper(static_cast<unsigned char>(source[i]));
         else
           result += source[i];
         uppercase_on_next_character = false;
@@ -136,7 +138,7 @@ namespace Crails
       else if (dash_on_next_character || (source[i] >= 'A' && source[i] <= 'Z'))
       {
         result += '-';
-        result += std::tolower(source[i]);
+        result += std::tolower(static_cast<unsigned char>(source[i]));
         dash_on_next_character = false;
       }
       else
@@ -149,20 +151,29 @@ namespace Crails
 
   string singularize(const string& tmp)
   {
-    if (tmp.length() > 3)
+    size_t length = tmp.length();
+
+    if (length > 3)
     {
-      string suffix = tmp.substr(tmp.length() - 3);
+      string suffix = tmp.substr(length - 3);
 
       if (suffix == "ies")
-        return tmp.substr(0, tmp.length() - 3) + 'y';
+        return tmp.substr(0, length - 3) + 'y';
       else if (suffix[1] == 'e' && suffix[2] == 's')
       {
-        if (suffix[0] == 's')
-          return tmp.substr(0, tmp.length() - 2);
-        return tmp.substr(0, tmp.length() - 1);
+        char   before_es       = suffix[0];
+        string two_before_es   = length > 4 ? tmp.substr(length - 4, 2) : string();
+        bool   drop_two_chars  = before_es == 's' || before_es == 'x' || before_es == 'z'
+                               || two_before_es == "ch" || two_before_es == "sh";
+
+        if (drop_two_chars)
+          return tmp.substr(0, length - 2);
+        return tmp.substr(0, length - 1);
       }
     }
-    return tmp.substr(0, tmp.length() - 1);
+    if (length > 0)
+      return tmp.substr(0, length - 1);
+    return tmp;
   }
 
   string pluralize(const string& tmp)

@@ -55,6 +55,7 @@ namespace Crails
     string current;
     char current_quote = 0;
 
+    ec = error_code{TokenizerOk, tokenize_error_category()};
     tokens.reserve(input.length());
     for (size_t i = 0 ; i < input.length() ; ++i)
     {

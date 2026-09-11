@@ -9,11 +9,13 @@ namespace Crails
   std::string join(ITERATOR begin, ITERATOR end, SEPARATOR separator = ' ')
   {
     std::ostringstream stream;
+    bool               first = true;
 
     for (ITERATOR it = begin; it != end ; ++it)
     {
-      if (separator && it != begin) stream << separator;
+      if (!first) stream << separator;
       stream << *it;
+      first = false;
     }
     return stream.str();
   }
