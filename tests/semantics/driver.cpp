@@ -21,6 +21,8 @@ int main()
   assert(Crails::singularize("worries") == "worry");
   assert(Crails::strip("   to  strip    ") == "to  strip");
   assert(Crails::strip("++strippable+", '+') == "strippable");
+  assert(Crails::uppercase("Impots et prelevements sociaux 2024") == "IMPOTS ET PRELEVEMENTS SOCIAUX 2024");
+  assert(Crails::lowercase("HAPPY Thursday!0~") == "happy thursday!0~");
 
   return 0;
 }

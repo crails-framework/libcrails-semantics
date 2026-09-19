@@ -1,4 +1,5 @@
 #include "semantics.hpp"
+#include <algorithm>
 
 using namespace std;
 
@@ -147,6 +148,18 @@ namespace Crails
     if (result.length() > 0 && result[0] == '-')
       result.erase(0, 1);
     return result;
+  }
+
+  string uppercase(string value)
+  {
+    transform(value.begin(), value.end(), value.begin(), [](unsigned char c) { return toupper(c); });
+    return value;
+  }
+
+  string lowercase(string value)
+  {
+    transform(value.begin(), value.end(), value.begin(), [](unsigned char c) { return tolower(c); });
+    return value;
   }
 
   string singularize(const string& tmp)

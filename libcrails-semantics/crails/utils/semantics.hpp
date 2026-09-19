@@ -17,6 +17,8 @@ namespace Crails
   std::string camelize(const std::string&, CamelizeOption = UpperCamelcase);
   std::string dasherize(const std::string&);
   std::string humanize(const std::string&);
+  std::string uppercase(std::string);
+  std::string lowercase(std::string);
   std::string strip(const std::string&, char character = ' ');
   std::string singularize(const std::string&);
   std::string pluralize(const std::string&);
