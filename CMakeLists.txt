@@ -1,7 +1,7 @@
 # runs with the following option:
 # -DCMAKE_TOOLCHAIN_FILE "$CHEERP_PATH/share/cmake/Modules/CheerpToolchain.cmake"
 
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 
 project(libcrails-semantic)
 include_directories(/usr/local/include . lib)
