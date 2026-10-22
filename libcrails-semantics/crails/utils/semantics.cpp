@@ -12,28 +12,24 @@ namespace Crails
         || (c >= '0' && c <= '9');
   }
 
-  string strip(const string& str, char character)
+  string strip(const string_view str, char character)
   {
-    size_t w_begin = 0;
-    size_t w_end   = 0;
-    bool   got_begin = false;
+    const string chars(1, character);
+    const size_t start = str.find_first_not_of(chars);
 
-    if (str.length() == 0) return str;
-    for (size_t i = 0 ; i < str.length() ; ++i)
-    {
-      if (str[i] != character)
-      {
-        if (got_begin == false)
-        {
-          w_begin   = i;
-          got_begin = true;
-        }
-        w_end = i;
-      }
-    }
-    if (got_begin == false)
+    if (start == string::npos)
       return string();
-    return str.substr(w_begin, (w_end + 1) - w_begin);
+    return string(str.substr(start, str.find_last_not_of(chars) - start + 1));
+  }
+
+  string trim(const string_view value)
+  {
+    const char* blank = " \t\r\n";
+    const size_t start = value.find_first_not_of(blank);
+
+    if (start == string_view::npos)
+      return string();
+    return string(value.substr(start, value.find_last_not_of(blank) - start + 1));
   }
 
   string remove_duplicate_characters(const string& source, char character)
